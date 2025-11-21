@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+meta
+  name: redis-servise
+spec:
+  selector:
+    matchLabels:
+      app: redis
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+      - name: master
+        image: bitnami/redis:6.0.13-alpine # Версия зафиксирована
+        env:
+          - name: ALLOW_EMPTY_PASSWORD
+            value: "yes"  # Отключаем пароль (обязательно для bitnami/redis!)
+        ports:
+          - containerPort: 6379
+          
