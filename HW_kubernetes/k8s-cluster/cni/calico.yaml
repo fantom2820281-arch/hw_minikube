@@ -1,0 +1,9 @@
+apiVersion: projectcalico.org/v3
+kind: Installation
+metadata:
+  name: default
+spec:
+  calicoNetwork:
+    ipPools:
+      - cidr: 192.168.0.0/16
+        blockSize: 26

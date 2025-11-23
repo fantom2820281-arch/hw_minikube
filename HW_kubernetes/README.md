@@ -55,10 +55,33 @@ create-vm() {
 create-vm
 ```
 ---
-скрипт запускаем с аргументом. аргумент имя машины.
+скрипт запускаем с аргументом. аргумент имя машины . подключаемся к машинам 
+
+
+```
+yc compute instance list
+
+```
+проверяем сети
+
+открываем второй терминал что бы параллельно  разворачивать две ноды
+```
+ssh yc-user@......
+ssh yc-user@......
+```
+
 
 ---
 разворачиваем на них архитектуру
+
+```
+nano arh.sh \ chmod +x arh.sh
+
+```
+---
+запускать скрипт с аргументами но скрипт другой или строить руками как кому удобно
+
+
 
 
 ```
@@ -224,7 +247,28 @@ sudo docker run hello-world
 
 ```
 ---
+проверяем работоспособность и настройки conteinerd
+
 ---
+# Проверка установки containerd
+sudo systemctl status containerd
+
+# Если сервис не активен, запустите его
+sudo systemctl start containerd
+sudo systemctl enable containerd
+
+# Проверка конфигурации
+sudo containerd config default > /etc/containerd/config.toml
+
+# Перезапуск сервиса
+sudo systemctl restart containerd
+
+# Проверка статуса
+sudo systemctl status containerd
+
+
+
+
 ---
 
 
@@ -270,6 +314,28 @@ sudo apt-mark hold kubelet kubeadm kubectl
 
 ```
 ---
+
+проверяем работоспособность и настройки conteinerd можно перед вводом команды на инициализацию 
+но либо докер либо кортейнерд должны работать корректно
+
+
+---
+# Проверка установки containerd
+sudo systemctl status containerd
+
+# Если сервис не активен, запустите его
+sudo systemctl start containerd
+sudo systemctl enable containerd
+
+# Проверка конфигурации
+sudo containerd config default > /etc/containerd/config.toml
+
+# Перезапуск сервиса
+sudo systemctl restart containerd
+
+# Проверка статуса
+sudo systemctl status containerd
+
 Пишем скрипт
 
 ```
@@ -422,3 +488,4 @@ spec:
 kubectl apply -f manifests/test-nginx.yaml
 
 ```
+
