@@ -1,0 +1,110 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+meta
+  name: ipamblocks.crd.projectcalico.org
+spec:
+  group: crd.projectcalico.org
+  names:
+    kind: IPAMBlock
+    listKind: IPAMBlockList
+    plural: ipamblocks
+    singular: ipamblock
+  scope: Cluster
+  versions:
+  - name: v1
+    schema:
+      openAPIV3Schema:
+        properties:
+          spec:
+            properties:
+              affinity:
+                type: string
+              cidr:
+                type: string
+              deleted:
+                type: boolean
+              strictAffinity:
+                type: boolean
+              unallocated:
+                items:
+                  type: integer
+                type: array
+            type: object
+    served: true
+    storage: true
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+meta
+  name: ippools.crd.projectcalico.org
+spec:
+  group: crd.projectcalico.org
+  names:
+    kind: IPPool
+    listKind: IPPoolList
+    plural: ippools
+    singular: ippool
+  scope: Cluster
+  versions:
+  - name: v1
+    schema:
+      openAPIV3Schema:
+        properties:
+          spec:
+            properties:
+              blockSize:
+                type: integer
+              cidr:
+                type: string
+              disabled:
+                type: boolean
+              encapsulation:
+                type: string
+              nat:
+                type: string
+              nodeSelector:
+                type: string
+              vxlanMode:
+                type: string
+            required:
+            - cidr
+            type: object
+    served: true
+    storage: true
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+meta
+  name: installations.operator.tigera.io
+spec:
+  group: operator.tigera.io
+  names:
+    kind: Installation
+    listKind: InstallationList
+    plural: installations
+    singular: installation
+  scope: Cluster
+  versions:
+  - name: v1
+    schema:
+      openAPIV3Schema:
+        properties:
+          spec:
+            properties:
+              calicoNetwork:
+                type: object
+              cni:
+                type: object
+              imagePullSecrets:
+                items:
+                  type: string
+                type: array
+              kubernetesProvider:
+                type: string
+              registry:
+                type: string
+              variant:
+                type: string
+            type: object
+    served: true
+    storage: true
